@@ -1,9 +1,9 @@
 site_name: "Maths, CS & AI Compendium"
-site_url: "https://henryndubuaku.github.io/maths-cs-ai-compendium/"
+site_url: "https://dengxuhui.github.io/maths-cs-ai-compendium_CN/"
 site_description: "An open, intuition-first textbook covering mathematics, computer science, and artificial intelligence from the ground up."
 site_author: "Henry Ndubuaku"
-repo_url: "https://github.com/HenryNdubuaku/maths-cs-ai-compendium"
-repo_name: "HenryNdubuaku/maths-cs-ai-compendium"
+repo_url: "https://github.com/dengxuhui/maths-cs-ai-compendium_CN"
+repo_name: "dengxuhui/maths-cs-ai-compendium_CN"
 
 docs_dir: docs
 
@@ -64,7 +64,7 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/HenryNdubuaku/maths-cs-ai-compendium
+      link: https://github.com/dengxuhui/maths-cs-ai-compendium_CN
 
 nav:
   - Home: index.md

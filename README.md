@@ -1,78 +1,70 @@
-# Maths, CS & AI Compendium
+# Maths, CS & AI Compendium（中文版）
 
 <img src="images/logo.png" alt="Logo" style="border-radius: 30px; width: 100%;">
 
-**Read online**: [henryndubuaku.github.io/maths-cs-ai-compendium](https://henryndubuaku.github.io/maths-cs-ai-compendium/)
+**在线阅读**: [dengxuhui.github.io/maths-cs-ai-compendium_CN](https://dengxuhui.github.io/maths-cs-ai-compendium_CN/)
 
-## Overview
-Most textbooks bury good ideas under dense notation, skip the intuition, assume you already know half the material, and quickly get outdated in fast-moving fields like AI. This is an open, unconventional textbook covering maths, computing, and artificial intelligence from the ground up. Written for curious practitioners looking to deeply understand the stuff, not just survive an exam/interview. 
+## 项目简介
+很多教材会把关键思想埋在密集符号里，弱化直觉解释，默认你已经掌握一半背景知识；而在 AI 这样变化极快的领域，内容也很容易过时。本项目是一本开放、非传统、强调直觉优先的教材，从零开始系统覆盖数学、计算机科学与人工智能，面向希望真正理解原理、而不仅是应付考试或面试的学习者。
 
-## Background
-Over the past years working in AI/ML, I filled notebooks with intuition first, real-world context, no hand-waving explanations of maths, computing and AI concepts. In 2025, a few friends used these notes to prep for interviews at DeepMind, OpenAI, Nvidia etc. They all got in and currently perform well in their roles. Meanwhile I got in Y Combinator last year. So I'm sharing to everyone.
+## 背景
+这是上游项目 `HenryNdubuaku/maths-cs-ai-compendium` 的中文 fork。该仓库的核心目标是持续提供高质量中文内容，帮助中文读者更系统地建立数学、计算机与 AI 的知识图谱。
 
 ## MCP Server
-This repo includes an MCP server that lets any AI assistant (Claude Code, Cursor, VS Code, etc.) use the compendium as a knowledge base. It requires a local clone of the repo. Comes with tools for educational purposes and example implementations.
+本仓库内置 MCP 服务器，可让 AI 助手（如 Claude Code、Cursor、VS Code 等）把本教材作为知识库进行调用。使用时需要本地克隆仓库，工具涵盖目录浏览、章节读取、关键词搜索、内容推荐与示例提取等教育场景。
 
-## Outline 
+## 内容大纲
 
-| # | Chapter | Summary | Status |
-|---|---------|---------|--------|
-| 01 | [Vectors](chapter%2001%3A%20vectors/01.%20vector%20spaces.md) | Spaces, magnitude, direction, norms, metrics, dot/cross/outer products, basis, duality | Available |
-| 02 | [Matrices](chapter%2002%3A%20matrices/01.%20matrix%20properties.md) | Properties, special types, operations, linear transformations, decompositions (LU, QR, SVD) | Available |
-| 03 | [Calculus](chapter%2003%3A%20calculus/01.%20differential%20calculus.md) | Derivatives, integrals, multivariate calculus, Taylor approximation, optimisation and gradient descent | Available |
-| 04 | [Statistics](chapter%2004%3A%20statistics/01.%20fundamentals.md) | Descriptive measures, sampling, central limit theorem, hypothesis testing, confidence intervals | Available |
-| 05 | [Probability](chapter%2005%3A%20probability/01.%20counting.md) | Counting, conditional probability, distributions, Bayesian methods, information theory | Available |
-| 06 | [Machine Learning](chapter%2006%3A%20machine%20learning/01.%20classical%20machine%20learning.md) | Classical ML, gradient methods, deep learning, reinforcement learning, distributed training | Available |
-| 07 | [Computational Linguistics](chapter%2007%3A%20computational%20linguistics/01.%20linguistic%20foundations.md) | syntax, semantics, pragmatics, NLP, language models, RNNs, CNNs, attention, transformers, text diffusion, text OCR, MoE, SSMs, modern LLM architectures, NLP evaluation | Available |
-| 08 | [Computer Vision](chapter%2008%3A%20computer%20vision/01.%20image%20fundamentals.md) | image processing, object detection, segmentation, video processing, SLAM, CNNs, vision transformers, diffusion, flow matching, VR/AR | Available |
-| 09 | [Audio & Speech](chapter%2009%3A%20audio%20and%20speech/01.%20digital%20signal%20processing.md) | DSP, ASR, TTS, voice & acoustic activity detection, diarisation, source separation, active noise cancellation, wavenet, conformer | Available |
-| 10 | [Multimodal Learning](chapter%2010%3A%20multimodal%20learning/01.%20multimodal%20representations.md) | fusion strategies, contrastive learning, CLIP, VLMs, image/video tokenisation, cross-modal generation, unified architectures, world models | Available |
-| 11 | [Autonomous Systems](chapter%2011%3A%20autonomous%20systems/01.%20perception.md) | perception, robot learning, VLAs, self-driving cars, space robots | Available |
-| 12 | [Graph Neural Networks](chapter%2012%3A%20graph%20neural%20networks/01.%20geometric%20deep%20learning.md) | geometric deep learning, graph theory, GNNs, graph attention, Graph Transformers, 3D equivariant networks | Available |
-| 13 | [Computing & OS](chapter%2013%3A%20computing%20and%20OS/01.%20discrete%20maths.md) | discrete maths, computer architecture, operating systems, concurrency, parallelism, programming languages | Available |
-| 14 | [Data Structures & Algorithms](chapter%2014%3A%20data%20structures%20and%20algorithms/00.%20foundations.md) | Big O, recursion, backtracking, DP, arrays, hashing, linked lists, stacks, trees, graphs, sorting, binary search | Available |
-| 15 | [Production Software Engineering](chapter%2015%3A%20production%20software%20engineering/01.%20linux%20and%20CMD.md) | Linux, Git, codebase design, testing, CI/CD, Docker, model serving, MLOps, monitoring, best way to use coding agents | Available |
-| 16 | [SIMD & GPU Programming](chapter%2016%3A%20SIMD%20and%20GPU%20programming/00.%20why%20C%2B%2B%20and%20how%20ML%20frameworks%20work.md) | C++ for ML, how frameworks work, hardware fundamentals, ARM NEON/I8MM/SME2, x86 AVX, GPU/CUDA, Triton, TPUs, RISC-V, Vulkan, WebGPU | Available |
-| 17 | [AI Inference](chapter%2017%3A%20AI%20inference/01.%20quantisation.md) | quantisation, efficient architectures, serving and batching, edge inference, speculative decoding, cost optimisation | Available |
-| 18 | [ML Systems Design](chapter%2018%3A%20ML%20systems%20design/01.%20systems%20design%20fundamentals.md) | systems fundamentals, cloud computing, distributed systems, ML lifecycle, feature stores, A/B testing, recommendation/search/ads/fraud design examples | Available |
-| 19 | Applied AI | Ai in finance, healthcare, protein, drug discovery | Coming |
-| 20 | Bleeding Edge AI | quantum ML, neuromorphic ML, decentralised AI, datacenters in space, brain machine interfaces | Coming |
+| # | 章节 | 内容摘要 | 状态 |
+|---|---|---|---|
+| 01 | [向量（Vectors）](chapter%2001%3A%20vectors/01.%20vector%20spaces.md) | 空间、模长、方向、范数与度量、点积/叉积/外积、基与对偶 | Available |
+| 02 | [矩阵（Matrices）](chapter%2002%3A%20matrices/01.%20matrix%20properties.md) | 矩阵性质、特殊矩阵、运算、线性变换、分解（LU/QR/SVD） | Available |
+| 03 | [微积分（Calculus）](chapter%2003%3A%20calculus/01.%20differential%20calculus.md) | 导数、积分、多元微积分、泰勒近似、优化与梯度下降 | Available |
+| 04 | [统计学（Statistics）](chapter%2004%3A%20statistics/01.%20fundamentals.md) | 描述统计、抽样、中心极限定理、假设检验、置信区间 | Available |
+| 05 | [概率论（Probability）](chapter%2005%3A%20probability/01.%20counting.md) | 计数、条件概率、分布、贝叶斯方法、信息论 | Available |
+| 06 | [机器学习（Machine Learning）](chapter%2006%3A%20machine%20learning/01.%20classical%20machine%20learning.md) | 经典机器学习、梯度方法、深度学习、强化学习、分布式训练 | Available |
+| 07 | [计算语言学（Computational Linguistics）](chapter%2007%3A%20computational%20linguistics/01.%20linguistic%20foundations.md) | 语法语义语用、NLP、语言模型、RNN/CNN/注意力/Transformer、现代 LLM 架构与评测 | Available |
+| 08 | [计算机视觉（Computer Vision）](chapter%2008%3A%20computer%20vision/01.%20image%20fundamentals.md) | 图像处理、检测与分割、视频处理、SLAM、CNN、视觉 Transformer、扩散与流匹配 | Available |
+| 09 | [语音与音频（Audio & Speech）](chapter%2009%3A%20audio%20and%20speech/01.%20digital%20signal%20processing.md) | DSP、ASR、TTS、语音活动检测、说话人分离、降噪、WaveNet、Conformer | Available |
+| 10 | [多模态学习（Multimodal Learning）](chapter%2010%3A%20multimodal%20learning/01.%20multimodal%20representations.md) | 融合策略、对比学习、CLIP、VLM、图像/视频 token 化、跨模态生成、统一架构 | Available |
+| 11 | [自主系统（Autonomous Systems）](chapter%2011%3A%20autonomous%20systems/01.%20perception.md) | 感知、机器人学习、VLA、自动驾驶、航天机器人 | Available |
+| 12 | [图神经网络（Graph Neural Networks）](chapter%2012%3A%20graph%20neural%20networks/01.%20geometric%20deep%20learning.md) | 几何深度学习、图论、GNN、图注意力、Graph Transformer、3D 等变网络 | Available |
+| 13 | [计算与操作系统（Computing & OS）](chapter%2013%3A%20computing%20and%20OS/01.%20discrete%20maths.md) | 离散数学、计算机体系结构、操作系统、并发并行、编程语言 | Available |
+| 14 | [数据结构与算法（Data Structures & Algorithms）](chapter%2014%3A%20data%20structures%20and%20algorithms/00.%20foundations.md) | Big O、递归、回溯、动态规划、数组、哈希、链表、栈、树、图、排序、二分 | Available |
+| 15 | [生产级软件工程（Production Software Engineering）](chapter%2015%3A%20production%20software%20engineering/01.%20linux%20and%20CMD.md) | Linux、Git、代码库设计、测试、CI/CD、Docker、模型服务、MLOps、监控 | Available |
+| 16 | [SIMD 与 GPU 编程（SIMD & GPU Programming）](chapter%2016%3A%20SIMD%20and%20GPU%20programming/00.%20why%20C%2B%2B%20and%20how%20ML%20frameworks%20work.md) | 面向 ML 的 C++、框架原理、硬件基础、ARM NEON、x86 AVX、CUDA、Triton、TPU 等 | Available |
+| 17 | [AI 推理（AI Inference）](chapter%2017%3A%20AI%20inference/01.%20quantisation.md) | 量化、高效架构、服务化与批处理、边缘推理、投机解码、成本优化 | Available |
+| 18 | [ML 系统设计（ML Systems Design）](chapter%2018%3A%20ML%20systems%20design/01.%20systems%20design%20fundamentals.md) | 系统基础、云计算、分布式系统、ML 生命周期、A/B 测试、推荐/搜索/广告案例 | Available |
+| 19 | Applied AI | 金融、医疗、蛋白质设计、药物发现等应用方向 | Coming |
+| 20 | Bleeding Edge AI | 量子 ML、类脑计算、去中心化 AI、太空数据中心、脑机接口 | Coming |
 
-## Foreword
+## 前言
 
-A newborn's brain is a newly initialised neural network, which trains from realworld data and experience into adulthood...until forever. Exceptional understanding of French with the flawless accent implies correct exposure to exceptional French and flawless accent. Similarly, great AI Researchers & engineers with excellent problem-skills imply quality knowledge consumed and exposure rich experience. 
+人的学习过程与神经网络训练有许多相似之处：持续输入、反复反馈、长期迭代。天赋会影响起点与学习速度，但高质量知识输入与足够的训练强度，通常才是决定上限的关键。
 
-Now Kvashchev's experiment was a long-term Serbian study demonstrating that intensive, three-year training in creative problem-solving can significantly boost intelligence, particularly fluid intelligence, adding 10-15 IQ points. There is such a thing as having a natuarally high IQ, similar to how quality weight initialisations yield better training, evidenced by nature-vs-nurture experimental findings. 
+这本教材的目标，是把数学、计算机和 AI 的知识链路打通，帮助不同基础的学习者建立更完整、更可迁移的理解框架。你只需要具备初等数学和基础 Python 编程能力，其余内容可以在阅读与实践中逐步掌握。
 
-However, the only advantage a high-IQ individual really has is the ability to learn/recognise patterns faster. But using a repeated pattern makes any concept absolutely learnable. Charles Darwin was considered a very average, if not below-average, student by his teachers and father. He described himself as not being quick-witted, feeling like a "slow processor" who needed time to soak in data.
+## 如何更高效学习
 
-Between 3-10yrs, I performed well academically, naturally grasping concepts without ever taking notes or revising. I got a bit cocky between 11-13 and dropped to the bottom half of an 80-student class with this technique. Now between 14-15, I began reading like a normal student, finishing 1st in my final secondary school semester. Early school curriculum works well with natural IQ but real-world talents are powered by quality knowledge consumption and execution intensity. 
+我推荐两阶段学习法：
 
-In fact, most students who perform well academically are just more studious, but the academic system is designed for fast learners. This compendium provides a rounded and well-connected flow of knowledge to facilitate better learning for the Darwins of the world. You only need elementary maths and basic python programming, everything else is picked up, just read and trust the process! 
+**阶段 1：课后累计式阅读**  
+每次上课后复读当日内容，并在下一次学习时从开头快速回顾到当前进度；对薄弱点补充检索和笔记，让知识网络不断加密。
 
-## How To Study Better 
+**阶段 2：考前影子阅读（主动回忆）**  
+先看标题再合上资料，用自己的话复述概念与推导；只重读遗漏部分，并尽量用代码或练习题实现关键思想，形成可调用的“肌肉记忆”。
 
-First semester at university, I took 17 modules at once, grades were not great for it, so I used a technique:
+## 关于原作者
 
-**Phase 1**: Cumulative reading after classes 
-Read each material after class, before bed. The next lecture, start all over until the current end, then fill knowledge gaps with additional research. This allows your brain to connect the patterns. 
+本项目原作者为 Henry Ndubuaku，中文版在保留核心知识体系的基础上进行中文化维护与持续更新。
 
-**Phase 2**: Shadow reading before exams 
-Read each slide/note subtitle, close the book, then visualise and write an explanation for that concept. Only re-read what you missed, similar to masked-language modelling in machine learning. After the re-read, ultimately implement the concept in code after. You develop muscle memory for each concept. 
-
-This worked really well for my friends who were not very confident. In fact, one of these friends beat me in advanced engineering mathematics modeule, where we covered Hessians and Optimisation. She works at a big oil & gas firm today. The willingness of the soul matters more than the body we are working with (Rosenthal experiment).
-
-## Who is Henry Ndubuaku?
-
-Read the GitHub profile! 
-
-## Citation
+## 引用
 ```bibtex
 @book{ndubuaku2025compendium,
   title     = {Maths, CS & AI Compendium},
   author    = {Henry Ndubuaku},
   year      = {2026},
   publisher = {GitHub},
-  url       = {https://github.com/HenryNdubuaku/maths-cs-ai-compendium}
+  url       = {https://dengxuhui.github.io/maths-cs-ai-compendium_CN/}
 }
 ```
