@@ -1,0 +1,6478 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="An open, intuition-first textbook covering mathematics, computer science, and artificial intelligence from the ground up.">
+      
+      
+        <meta name="author" content="Henry Ndubuaku">
+      
+      
+        <link rel="canonical" href="https://dengxuhui.github.io/maths-cs-ai-compendium_CN/chapter%2010%3A%20multimodal%20learning/04.%20cross-modal%20generation/">
+      
+      
+        <link rel="prev" href="../03.%20image%20and%20video%20tokenisation/">
+      
+      
+        <link rel="next" href="../05.%20unified%20multimodal%20architectures/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cross-Modal Generation - Maths, CS & AI Compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Cross-Modal Generation - Maths, CS & AI Compendium" />
+<meta property="og:description" content="An open, intuition-first textbook covering mathematics, computer science, and artificial intelligence from the ground up." />
+<meta property="og:image" content="https://dengxuhui.github.io/maths-cs-ai-compendium_CN/assets/images/social/chapter%2010%3A%20multimodal%20learning/04.%20cross-modal%20generation.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://dengxuhui.github.io/maths-cs-ai-compendium_CN/chapter%2010%3A%20multimodal%20learning/04.%20cross-modal%20generation/" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Cross-Modal Generation - Maths, CS & AI Compendium" />
+<meta property="twitter:description" content="An open, intuition-first textbook covering mathematics, computer science, and artificial intelligence from the ground up." />
+<meta property="twitter:image" content="https://dengxuhui.github.io/maths-cs-ai-compendium_CN/assets/images/social/chapter%2010%3A%20multimodal%20learning/04.%20cross-modal%20generation.png" />
+</head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="slate" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Maths, CS &amp; AI Compendium" class="md-header__button md-logo" aria-label="Maths, CS & AI Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Maths, CS & AI Compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cross-Modal Generation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="slate" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="slate" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dengxuhui/maths-cs-ai-compendium_CN" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dengxuhui/maths-cs-ai-compendium_CN
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2001%3A%20vectors/01.%20vector%20spaces/" class="md-tabs__link">
+          
+  
+  
+  Vectors
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2002%3A%20matrices/01.%20matrix%20properties/" class="md-tabs__link">
+          
+  
+  
+  Matrices
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2003%3A%20calculus/01.%20differential%20calculus/" class="md-tabs__link">
+          
+  
+  
+  Calculus
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2004%3A%20statistics/01.%20fundamentals/" class="md-tabs__link">
+          
+  
+  
+  Statistics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2005%3A%20probability/01.%20counting/" class="md-tabs__link">
+          
+  
+  
+  Probability
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2006%3A%20machine%20learning/01.%20classical%20machine%20learning/" class="md-tabs__link">
+          
+  
+  
+  Machine Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2007%3A%20computational%20linguistics/01.%20linguistic%20foundations/" class="md-tabs__link">
+          
+  
+  
+  Computational Linguistics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2008%3A%20computer%20vision/01.%20image%20fundamentals/" class="md-tabs__link">
+          
+  
+  
+  Computer Vision
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2009%3A%20audio%20and%20speech/01.%20digital%20signal%20processing/" class="md-tabs__link">
+          
+  
+  
+  Audio and Speech
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01.%20multimodal%20representations/" class="md-tabs__link">
+          
+  
+  
+  Multimodal Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2011%3A%20autonomous%20systems/01.%20perception/" class="md-tabs__link">
+          
+  
+  
+  Autonomous Systems
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2012%3A%20graph%20neural%20networks/01.%20geometric%20deep%20learning/" class="md-tabs__link">
+          
+  
+  
+  Graph Neural Networks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2013%3A%20computing%20and%20OS/01.%20discrete%20maths/" class="md-tabs__link">
+          
+  
+  
+  Computing and OS
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2014%3A%20data%20structures%20and%20algorithms/00.%20foundations/" class="md-tabs__link">
+          
+  
+  
+  Data Structures and Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2015%3A%20production%20software%20engineering/01.%20linux%20and%20CMD/" class="md-tabs__link">
+          
+  
+  
+  Production Software Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2016%3A%20SIMD%20and%20GPU%20programming/00.%20why%20C%2B%2B%20and%20how%20ML%20frameworks%20work/" class="md-tabs__link">
+          
+  
+  
+  SIMD and GPU Programming
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2017%3A%20AI%20inference/01.%20quantisation/" class="md-tabs__link">
+          
+  
+  
+  AI Inference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2018%3A%20ML%20systems%20design/01.%20systems%20design%20fundamentals/" class="md-tabs__link">
+          
+  
+  
+  ML Systems Design
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2019%3A%20applied%20AI/01.%20AI%20for%20finance/" class="md-tabs__link">
+          
+  
+  
+  Applied AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter%2020%3A%20bleeding%20edge%20AI/01.%20quantum%20machine%20learning/" class="md-tabs__link">
+          
+  
+  
+  Bleeding Edge AI
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Maths, CS &amp; AI Compendium" class="md-nav__button md-logo" aria-label="Maths, CS & AI Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Maths, CS & AI Compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dengxuhui/maths-cs-ai-compendium_CN" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dengxuhui/maths-cs-ai-compendium_CN
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vectors
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vectors
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2001%3A%20vectors/01.%20vector%20spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Spaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2001%3A%20vectors/02.%20vector%20properties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Properties
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2001%3A%20vectors/03.%20norms%20and%20metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Norms and Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2001%3A%20vectors/04.%20products/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2001%3A%20vectors/05.%20basis%20and%20duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basis and Duality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matrices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Matrices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2002%3A%20matrices/01.%20matrix%20properties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matrix Properties
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2002%3A%20matrices/02.%20matrix%20types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matrix Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2002%3A%20matrices/03.%20operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2002%3A%20matrices/04.%20linear%20transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear Transformations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2002%3A%20matrices/05.%20decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decompositions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calculus
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Calculus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2003%3A%20calculus/01.%20differential%20calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differential Calculus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2003%3A%20calculus/02.%20integral%20calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integral Calculus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2003%3A%20calculus/03.%20multivariate%20calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multivariate Calculus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2003%3A%20calculus/04.%20function%20approximation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function Approximation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2003%3A%20calculus/05.%20optimisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Statistics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2004%3A%20statistics/01.%20fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2004%3A%20statistics/02.%20measures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2004%3A%20statistics/03.%20sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sampling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2004%3A%20statistics/04.%20hypothesis%20testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hypothesis Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2004%3A%20statistics/05.%20inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Probability
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Probability
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2005%3A%20probability/01.%20counting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Counting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2005%3A%20probability/02.%20probability%20concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Probability Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2005%3A%20probability/03.%20distributions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distributions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2005%3A%20probability/04.%20bayesian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bayesian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2005%3A%20probability/05.%20information%20theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Information Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2006%3A%20machine%20learning/01.%20classical%20machine%20learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classical Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2006%3A%20machine%20learning/02.%20gradient%20machine%20learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gradient Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2006%3A%20machine%20learning/03.%20deep%20learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2006%3A%20machine%20learning/04.%20reinforcement%20learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2006%3A%20machine%20learning/05.%20distributed%20deep%20learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distributed Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computational Linguistics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computational Linguistics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2007%3A%20computational%20linguistics/01.%20linguistic%20foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linguistic Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2007%3A%20computational%20linguistics/02.%20text%20processing%20and%20classic%20NLP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing and Classic NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2007%3A%20computational%20linguistics/03.%20embeddings%20and%20sequence%20models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embeddings and Sequence Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2007%3A%20computational%20linguistics/04.%20transformers%20and%20language%20models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformers and Language Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2007%3A%20computational%20linguistics/05.%20advanced%20text%20generation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Text Generation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer Vision
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computer Vision
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2008%3A%20computer%20vision/01.%20image%20fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2008%3A%20computer%20vision/02.%20convolutional%20networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutional Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2008%3A%20computer%20vision/03.%20object%20detection%20and%20segmentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Object Detection and Segmentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2008%3A%20computer%20vision/04.%20vision%20transformers%20and%20generation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vision Transformers and Generation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2008%3A%20computer%20vision/05.%20video%20and%203D%20vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Video and 3D Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audio and Speech
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Audio and Speech
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2009%3A%20audio%20and%20speech/01.%20digital%20signal%20processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Signal Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2009%3A%20audio%20and%20speech/02.%20automatic%20speech%20recognition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatic Speech Recognition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2009%3A%20audio%20and%20speech/03.%20text%20to%20speech%20and%20voice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text to Speech and Voice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2009%3A%20audio%20and%20speech/04.%20speaker%20and%20audio%20analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Speaker and Audio Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2009%3A%20audio%20and%20speech/05.%20source%20separation%20and%20noise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Separation and Noise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multimodal Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Multimodal Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01.%20multimodal%20representations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multimodal Representations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02.%20vision%20language%20models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vision Language Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03.%20image%20and%20video%20tokenisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image and Video Tokenisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Modal Generation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Modal Generation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文本到图像的生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文本到图像的生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dall-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DALL-E：自回归图像生成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        稳定扩散：带有文本调节的潜在扩散
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实践中的无分类器指导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imagen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Imagen：具有语言理解的级联扩散
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parti：大规模自回归
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DiT 和基于流的生成
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文本到视频生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文本到视频生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        暂时的挑战
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        制作视频和延伸至视频的方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#videopoet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VideoPoet 和基于令牌的视频模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        空式时间扩散
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wan：开源视频生成
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文本转音频生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文本转音频生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#audiolm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AudioLM：音频语言建模
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#musiclm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MusicLM：文本调节音乐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#musicgen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MusicGen：高效单级发电
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图像到文本的生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="图像到文本的生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作为条件生成的字幕
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代视觉语言字幕
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        视频音频联产
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="视频音频联产">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        联合时间建模
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指令后续生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指令后续生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instructpix2pix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InstructPix2Pix：按描述编辑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdedit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SDEdit 和基于噪声的编辑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        学期_0：空间调节
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一致性和对齐指标
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一致性和对齐指标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#frechet-fid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frechet 起始距离 (FID)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        起始分数 (IS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clipscore-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLIPScore：测量文本-图像对齐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        人工评价
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        道德考虑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="道德考虑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        深度造假和错误信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一代人的偏见
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内容过滤和安全
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        知识产权和同意
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        编码任务(使用 CoLab 或笔记本)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05.%20unified%20multimodal%20architectures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unified Multimodal Architectures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autonomous Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Autonomous Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2011%3A%20autonomous%20systems/01.%20perception/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Perception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2011%3A%20autonomous%20systems/02.%20robot%20learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2011%3A%20autonomous%20systems/03.%20vision-language-action%20models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vision-Language-Action Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2011%3A%20autonomous%20systems/04.%20self-driving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Driving
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2011%3A%20autonomous%20systems/05.%20space%20and%20extreme%20robotics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Space and Extreme Robotics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graph Neural Networks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2012%3A%20graph%20neural%20networks/01.%20geometric%20deep%20learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geometric Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2012%3A%20graph%20neural%20networks/02.%20graph%20theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2012%3A%20graph%20neural%20networks/03.%20graph%20neural%20networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2012%3A%20graph%20neural%20networks/04.%20graph%20attention%20networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Attention Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2012%3A%20graph%20neural%20networks/05.%203d%20graph%20networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D Graph Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computing and OS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computing and OS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2013%3A%20computing%20and%20OS/01.%20discrete%20maths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Discrete Maths
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2013%3A%20computing%20and%20OS/02.%20computer%20architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2013%3A%20computing%20and%20OS/03.%20operating%20systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operating Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2013%3A%20computing%20and%20OS/04.%20concurrency%20and%20parallelism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency and Parallelism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2013%3A%20computing%20and%20OS/05.%20programming%20languages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programming Languages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures and Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures and Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2014%3A%20data%20structures%20and%20algorithms/00.%20foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2014%3A%20data%20structures%20and%20algorithms/01.%20arrays%20and%20hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays and Hashing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2014%3A%20data%20structures%20and%20algorithms/02.%20linked%20lists%2C%20stacks%2C%20and%20queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linked Lists, Stacks, and Queues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2014%3A%20data%20structures%20and%20algorithms/03.%20trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trees
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2014%3A%20data%20structures%20and%20algorithms/04.%20graphs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2014%3A%20data%20structures%20and%20algorithms/05.%20sorting%20and%20search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Production Software Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Production Software Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2015%3A%20production%20software%20engineering/01.%20linux%20and%20CMD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux and CMD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2015%3A%20production%20software%20engineering/02.%20git%20and%20repository%20management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git and Repository Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2015%3A%20production%20software%20engineering/03.%20codebase%20design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codebase Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2015%3A%20production%20software%20engineering/04.%20testing%20and%20quality%20assurance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Quality Assurance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2015%3A%20production%20software%20engineering/05.%20deployment%20and%20devops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment and DevOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SIMD and GPU Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SIMD and GPU Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2016%3A%20SIMD%20and%20GPU%20programming/00.%20why%20C%2B%2B%20and%20how%20ML%20frameworks%20work/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why C++ and How ML Frameworks Work
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2016%3A%20SIMD%20and%20GPU%20programming/01.%20hardware%20fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2016%3A%20SIMD%20and%20GPU%20programming/02.%20ARM%20and%20NEON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARM and NEON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2016%3A%20SIMD%20and%20GPU%20programming/03.%20x86%20and%20AVX/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    x86 and AVX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2016%3A%20SIMD%20and%20GPU%20programming/04.%20GPU%20architecture%20and%20CUDA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Architecture and CUDA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2016%3A%20SIMD%20and%20GPU%20programming/05.%20triton%2C%20TPUs%20and%20pallax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triton, TPUs, and Pallas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2016%3A%20SIMD%20and%20GPU%20programming/06.%20RISC-V%20and%20embedded%20systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RISC-V and Embedded Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2016%3A%20SIMD%20and%20GPU%20programming/07.%20vulkan%20compute%20and%20cross-platform%20GPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vulkan Compute and Cross-Platform GPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Inference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_18">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Inference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2017%3A%20AI%20inference/01.%20quantisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2017%3A%20AI%20inference/02.%20efficient%20architectures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Efficient Architectures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2017%3A%20AI%20inference/03.%20serving%20and%20batching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Serving and Batching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2017%3A%20AI%20inference/04.%20edge%20inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edge Inference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2017%3A%20AI%20inference/05.%20scaling%20and%20deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scaling and Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Systems Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ML Systems Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2018%3A%20ML%20systems%20design/01.%20systems%20design%20fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systems Design Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2018%3A%20ML%20systems%20design/02.%20cloud%20computing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2018%3A%20ML%20systems%20design/03.%20large%20scale%20infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Large Scale Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2018%3A%20ML%20systems%20design/04.%20ML%20systems%20design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Systems Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2018%3A%20ML%20systems%20design/05.%20ML%20design%20examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Design Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_20" >
+        
+          
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applied AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2019%3A%20applied%20AI/01.%20AI%20for%20finance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI for Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2019%3A%20applied%20AI/02.%20protein%20design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protein Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2019%3A%20applied%20AI/03.%20drug%20discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Drug Discovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2019%3A%20applied%20AI/04.%20agentic%20systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agentic Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2019%3A%20applied%20AI/05.%20healthcare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Healthcare
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_21" >
+        
+          
+          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bleeding Edge AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_21">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bleeding Edge AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2020%3A%20bleeding%20edge%20AI/01.%20quantum%20machine%20learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2020%3A%20bleeding%20edge%20AI/02.%20neuromorphic%20computing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neuromorphic Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2020%3A%20bleeding%20edge%20AI/03.%20datacentres%20in%20space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datacentres in Space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2020%3A%20bleeding%20edge%20AI/04.%20decentralised%20AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decentralised AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter%2020%3A%20bleeding%20edge%20AI/05.%20brain%20machine%20interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brain Machine Interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文本到图像的生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文本到图像的生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dall-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DALL-E：自回归图像生成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        稳定扩散：带有文本调节的潜在扩散
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实践中的无分类器指导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imagen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Imagen：具有语言理解的级联扩散
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parti：大规模自回归
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DiT 和基于流的生成
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文本到视频生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文本到视频生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        暂时的挑战
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        制作视频和延伸至视频的方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#videopoet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VideoPoet 和基于令牌的视频模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        空式时间扩散
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wan：开源视频生成
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文本转音频生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文本转音频生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#audiolm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AudioLM：音频语言建模
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#musiclm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MusicLM：文本调节音乐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#musicgen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MusicGen：高效单级发电
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图像到文本的生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="图像到文本的生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作为条件生成的字幕
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代视觉语言字幕
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        视频音频联产
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="视频音频联产">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        联合时间建模
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指令后续生成
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指令后续生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instructpix2pix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InstructPix2Pix：按描述编辑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdedit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SDEdit 和基于噪声的编辑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        学期_0：空间调节
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一致性和对齐指标
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一致性和对齐指标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#frechet-fid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frechet 起始距离 (FID)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        起始分数 (IS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clipscore-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLIPScore：测量文本-图像对齐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        人工评价
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        道德考虑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="道德考虑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        深度造假和错误信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一代人的偏见
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内容过滤和安全
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        知识产权和同意
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        编码任务(使用 CoLab 或笔记本)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">跨模式生成<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><em>跨模态生成以一种模态的输入为条件产生另一种模态的输出；文本到图像、图像到文本、文本到音频等等。该文件涵盖 DALL-E、稳定扩散、无分类器指导、ControlNet、图像字幕、文本到视频 (Sora) 和文本到音频生成。</em></p>
+<ul>
+<li>
+<p>在本章的文件 01-03 中，您学习了如何表示、对齐和标记不同的模态。现在是创造性的行为：从另一种形态中生成一种形态。跨模式生成是文本到图像工具、视频合成系统、音乐创作模型和图像字幕背后的引擎。可以把它想象成教机器成为多媒体艺术家——你用文字描述你想要的东西，它就会绘画、制作动画或作曲。</p>
+</li>
+<li>
+<p>核心思想是<strong>条件生成</strong>：给定模态 <span class="arithmatex">\(A\)</span>(例如文本)的输入，以模态 <span class="arithmatex">\(B\)</span>(例如图像)生成输出。正式地，您学习模型 <span class="arithmatex">\(p_\theta(y \mid x)\)</span>，其中 <span class="arithmatex">\(x\)</span> 是调节信号，<span class="arithmatex">\(y\)</span> 是生成的输出。挑战在于，这种条件分布非常复杂且高维 - 512x512 图像存在于 <span class="arithmatex">\(\mathbb{R}^{786432}\)</span> 中，并且单个文本 prompt 有许多有效图像。</p>
+</li>
+</ul>
+<p><img alt="Cross-modal generation overview: text, image, audio, and video modalities connected by directional arrows showing generation pathways such as text-to-image, image-to-text, text-to-audio, and text-to-video" src="../../images/cross_modal_generation_overview.svg" /></p>
+<h2 id="_2">文本到图像的生成<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>想象一下您向法庭素描艺术家描述一个场景。艺术家必须解释你的文字，回忆物体的样子，在空间上组合它们，并渲染最终的图片。文本到图像模型正是这样做的，但它们必须从数据而不是从多年的艺术学校学习所有这些技能。</li>
+</ul>
+<h3 id="dall-e">DALL-E：自回归图像生成<a class="headerlink" href="#dall-e" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>DALL-E</strong>(Ramesh 等人，2021)将图像生成视为序列预测问题 - 与支持语言模型的范例相同(第 07 章)。关键的见解是，如果您可以将图像表示为离散的 tokens (回想一下文件 03 中的 VQ-VAE )，那么生成图像只是生成一系列 tokens ，一个接一个。</p>
+</li>
+<li>
+<p>该管道有两个阶段。首先，<strong>离散 VAE (dVAE)</strong> 将 256x256 图像从 8192 个条目的 codebook 压缩为离散 tokens 的 32x32 网格，将图像减少为 1024 tokens 的序列。其次，训练 <strong>transformer decoder</strong> 对 256 个文本 tokens (BPE 编码)与 1024 个图像 tokens 连接的联合分布进行建模，总共 1280 个 tokens：</p>
+</li>
+</ul>
+<div class="arithmatex">\[p(x_{\text{text}}, x_{\text{img}}) = \prod_{i=1}^{1280} p(x_i \mid x_1, \ldots, x_{i-1})\]</div>
+<ul>
+<li>
+<p>在生成时，您输入文本 tokens ，模型就会对图像 tokens 进行一一自回归采样。这很优雅，因为它重用了语言建模的精确机制 - attention、causal 掩码、top-k 采样 - 进行图像合成。</p>
+</li>
+<li>
+<p>缺点是 autoregressive 生成本质上是顺序的：一次生成 1024 个 tokens 速度很慢，并且序列中早期的任何错误都会复合。 DALL-E 通过生成许多候选图像并使用 CLIP(来自文件 01)对它们重新排序以找到与文本 prompt 的最佳匹配来缓解这一问题。</p>
+</li>
+</ul>
+<p><img alt="DALL-E pipeline: text tokens and image tokens concatenated into a single sequence, processed by a transformer decoder that autoregressively predicts image tokens conditioned on text tokens" src="../../images/dalle_autoregressive_pipeline.svg" /></p>
+<h3 id="_3">稳定扩散：带有文本调节的潜在扩散<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>稳定扩散</strong>(Rombach 等人，2022)采用了根本不同的方法。它不是一一预测 tokens，而是从纯噪声开始，并在文本 prompt 的引导下逐渐将其去噪为图像。回想一下第 8 章中的 diffusion 模型——稳定扩散在压缩的潜在空间而不是像素空间中运行，这使得它的效率大大提高。</p>
+</li>
+<li>
+<p>该架构由三个协同工作的组件组成。 <strong>VAE encoder</strong> 将图像从像素空间 (<span class="arithmatex">\(512 \times 512 \times 3\)</span>) 压缩到潜在表示 (<span class="arithmatex">\(64 \times 64 \times 4\)</span>)，将维度减少 48 倍。<strong>文本 encoder</strong> (通常为 CLIP 或 OpenCLIP)将文本 prompt 转换为 embedding 向量序列。 <strong>U-Net 降噪器</strong> 采用噪声潜伏、时间步长和文本 embeddings，并预测每一步要减去的噪声。文本调节通过 <strong>cross-attention</strong> 层进入 U-Net：</p>
+</li>
+</ul>
+<div class="arithmatex">\[\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d}}\right)V\]</div>
+<ul>
+<li>
+<p>其中 <span class="arithmatex">\(Q\)</span> 来自噪声图像特征，<span class="arithmatex">\(K, V\)</span> 来自文本 embeddings。这让模型能够关注每个空间位置的相关单词——当对应该出现“红球”的区域进行去噪时，模型会关注 tokens“红色”和“球”。</p>
+</li>
+<li>
+<p>在推理时，您在潜在空间中对 <span class="arithmatex">\(z_T \sim \mathcal{N}(0, I)\)</span> 进行采样，使用 U-Net 迭代去噪 <span class="arithmatex">\(T\)</span> 步骤(使用 DDIM 调度通常为 20-50)，并使用 VAE decoder 将干净的潜在 <span class="arithmatex">\(z_0\)</span> 解码回像素空间。整个前向传递只需几秒钟即可在消费级 GPU 上生成 512x512 的图像。</p>
+</li>
+</ul>
+<p><img alt="Stable Diffusion architecture: text prompt encoded by CLIP, random noise in latent space iteratively denoised by a U-Net with cross-attention to text embeddings, then decoded by VAE to produce the final image" src="../../images/stable_diffusion_architecture.svg" /></p>
+<h3 id="_4">实践中的无分类器指导<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>无分类器指导 (CFG)</strong> 是使文本到图像模型生成与其提示实际匹配的图像的秘密成分。回想一下第 8 章，CFG 有条件和无条件地训练模型，然后在采样时放大条件信号：</li>
+</ul>
+<div class="arithmatex">\[\hat{\epsilon} = \epsilon_\theta(x_t, \varnothing) + s \cdot (\epsilon_\theta(x_t, c) - \epsilon_\theta(x_t, \varnothing))\]</div>
+<ul>
+<li>
+<p>其中 <span class="arithmatex">\(s\)</span> 是指导比例。将术语 <span class="arithmatex">\((\epsilon_\theta(x_t, c) - \epsilon_\theta(x_t, \varnothing))\)</span> 视为“朝向 prompt 的方向”——它捕获了条件预测与无条件预测的不同之处。乘以 <span class="arithmatex">\(s &gt; 1\)</span> 会夸大这个方向，使图像更接近文本描述，但会牺牲多样性。</p>
+</li>
+<li>
+<p>实际上，<span class="arithmatex">\(s = 7.5\)</span> 是稳定扩散的常见默认值。在 <span class="arithmatex">\(s = 1.0\)</span> 处，您将获得原始模型输出(多样但与 prompt 松散匹配)。在 <span class="arithmatex">\(s = 20+\)</span> 时，图像变得过饱和且重复，但与文本非常紧密地对齐。最佳 <span class="arithmatex">\(s\)</span> 取决于应用：创造性探索有利于较低的指导，而精确的 prompt 遵守则需要较高的指导。</p>
+</li>
+</ul>
+<h3 id="imagen">Imagen：具有语言理解的级联扩散<a class="headerlink" href="#imagen" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Imagen</strong>(Saharia 等人，2022)证明，强大的文本 encoder 比更大的图像模型更重要。 Imagen 使用冻结的 <strong>T5-XXL</strong> 语言模型(来自第 07 章)作为文本 encoder，而不是 CLIP，它对语言语义、组合性和空间关系(“红色球体顶部的蓝色立方体”)有更丰富的理解。</p>
+</li>
+<li>
+<p>Imagen 使用 <strong>级联 diffusion</strong> 方法：基本 diffusion 模型生成 64x64 图像，第一个超分辨率模型升级到 256x256，第二个超分辨率模型达到 1024x1024。每个阶段都是一个单独的 diffusion 模型，以文本和(对于升级者)较低分辨率的图像为条件。这种级联避免了在基本分辨率下对精细细节进行建模，从而允许基本模型专注于构图和语义，而升级器则处理纹理和清晰度。</p>
+</li>
+<li>
+<p>Imagen 还引入了<strong>动态阈值</strong>：在每个去噪步骤中，预测像素值被剪切到基于百分位数的范围，而不是固定范围 <span class="arithmatex">\([-1, 1]\)</span>。这可以防止高指导尺度下的饱和伪影，这是 diffusion 模型中的常见问题。</p>
+</li>
+</ul>
+<h3 id="parti">Parti：大规模自回归<a class="headerlink" href="#parti" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Parti</strong>(Pathways Autoregressive Text-to-Image，Yu et al.，2022)大规模复兴了 autoregressive 方法。与 DALL-E 一样，它将图像转换为离散的 tokens(使用 ViT-VQGAN)，并使用 transformer 顺序生成它们。但 Parti 使用了 200 亿参数的编码器-解码器 transformer(基于 Pathways 架构)，并表明 autoregressive 模型在充分扩展时可以匹配 diffusion 质量。</p>
+</li>
+<li>
+<p>Parti 的编码器-解码器架构与 DALL-E 的纯解码器设计有一个关键区别。文本经过 encoder； decoder 在生成图像 tokens 时交叉参与编码文本。这反映了机器翻译(第 07 章)——您从“文本语言”翻译为“图像语言”。</p>
+</li>
+</ul>
+<h3 id="dit">DiT 和基于流的生成<a class="headerlink" href="#dit" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>扩散变压器 (DiT)</strong> (Peebles 和 Xie，2023)用普通的 transformer 替换 diffusion 模型中的 U-Net 主干。每个噪声潜在补丁都被视为 token (类似于第 8 章中的 ViT )，并且 transformer 使用 self-attention 和 cross-attention 处理这些 tokens 到文本条件。 DiT 表明，在 diffusion 中，Transformer 的扩展比 U-Net 更可预测——计算量加倍，可靠地将 FID 分数减半。</p>
+</li>
+<li>
+<p><strong>流匹配</strong>(回顾第 8 章)已经作为 diffusion 噪声预测范例的替代方案出现。该模型不是预测要减去的噪声 <span class="arithmatex">\(\epsilon\)</span>，而是预测沿着从噪声到数据的直线路径传输样本的速度 <span class="arithmatex">\(v_\theta(x_t, t)\)</span>。 <strong>Stable Diffusion 3</strong> 和 <strong>Flux</strong> 采用 flow matching 和 <strong>多模态 DiT (MM-DiT)</strong> 架构，其中文本和图像 tokens 由具有双向 attention 的 transformer 块联合处理 - 两种模态相互关注，而不是仅通过 cross-attention 调节图像特征的文本。</p>
+</li>
+</ul>
+<p><img alt="DiT architecture: noisy latent patches tokenised like ViT, processed by transformer blocks with adaptive layer normalisation for timestep and class conditioning, then decoded back to spatial latent" src="../../images/dit_architecture.svg" /></p>
+<h2 id="_5">文本到视频生成<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>文本到视频是文本到图像，具有严格的附加约束：<strong>时间连贯性</strong>。每个帧必须内部一致(有效的图像)，但连续的帧也必须平滑连接——对象应该自然移动，光照应该连续变化，“相机”应该遵循物理上合理的轨迹。想想画一幅风景画和导演一部电影之间的区别。</li>
+</ul>
+<h3 id="_6">暂时的挑战<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>视频带来了图像生成之外的三个挑战。 <strong>时间一致性</strong>要求对象在各个帧之间保持其身份 - 第 1 帧中的狗应该仍然是第 100 帧中的同一只狗。 <strong>运动建模</strong>需要学习物理动力学：对象如何移动、重力如何工作、流体如何流动。 <strong>计算成本</strong>非常严重：24 fps 和 512x512 分辨率的 10 秒视频包含 <span class="arithmatex">\(10 \times 24 \times 512 \times 512 \times 3 \approx 188\)</span> 万个值，大约是单个图像数据量的 240 倍。</li>
+</ul>
+<h3 id="_7">制作视频和延伸至视频的方法<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Make-A-Video</strong>(Singer 等人，2022)采取了一种务实的方法：从预先训练的文本到图像模型开始，然后添加时间层。关键的见解是，您已经拥有经过数十亿图像-文本对训练的强大文本-图像模型，并且您只需要从(未标记的)视频数据中学习运动。</p>
+</li>
+<li>
+<p>Make-A-Video 将 <strong>时间 attention</strong> 和 <strong>时间卷积</strong> 层插入到预先训练的空间 U-Net 中。空间层(在图像上预先训练)处理外观，而新的时间层(在视频上训练)处理运动。空间 self-attention 在每一帧内运行；时间 attention 在每个空间位置跨帧进行操作。这种分解是有效的，因为时间和空间模式在很大程度上是可分离的。</p>
+</li>
+<li>
+<p>生成管道反映了 Imagen 的级联：基本模型以 64x64 生成 16 帧，然后空间和时间超分辨率模型升级到最终分辨率和帧速率。帧插值网络增加了时间平滑度。</p>
+</li>
+</ul>
+<h3 id="videopoet">VideoPoet 和基于令牌的视频模型<a class="headerlink" href="#videopoet" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>VideoPoet</strong>(Kondratyuk 等人，2024)在语言建模范式下统一了视频生成。所有模态(文本、图像、视频、音频)都被标记为离散序列，并且训练单个大型语言模型 (LLM) 来跨所有模态自回归预测 tokens。这实现了 zero-shot 功能：文本到视频、图像到视频、视频到音频、视频编辑和修复都来自同一模型。</p>
+</li>
+<li>
+<p>VideoPoet 使用 MAGVIT-v2 encoder (来自文件 03 的 3D VQ-VAE)对视频进行标记，该 MAGVIT-v2 encoder 联合压缩空间和时间维度。音频使用 SoundStream 进行标记。 LLM 主干网络在文本上进行了预训练，并在多模态 token 序列上进行了微调，学习跨模态的联合分布。</p>
+</li>
+</ul>
+<h3 id="_8">空式时间扩散<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Sora</strong>(OpenAI，2024)将时间 diffusion 引入主流 attention ，能够生成长的、连贯的、物理上合理的视频。虽然完整的架构细节尚未发布，但关键思想涉及将 DiT 缩放到时空：视频帧被分解为<strong>时空补丁</strong>(跨高度、宽度和时间的 3D 块)，这些块被视为大型 transformer 的 tokens。</p>
+</li>
+<li>
+<p>时空补丁方法意味着模型将视频作为原生 3D 信号而不是 2D 帧序列进行处理。这使得它能够捕获长范围的时间依赖性——该模型可以在整个视频持续时间内“提前计划”，而不是逐帧生成。</p>
+</li>
+<li>
+<p>Sora 可以通过调整时空补丁的数量来处理可变的持续时间、分辨率和纵横比。以原始分辨率对数据进行训练(而不是将所有内容裁剪为正方形)可以提高构图和取景质量。</p>
+</li>
+</ul>
+<h3 id="wan">Wan：开源视频生成<a class="headerlink" href="#wan" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Wan</strong>(Wan 等人，2025)是一系列开源视频生成模型(1.3B 和 14B 参数)，建立在 DiT 主干上，具有 3D VAE 时间压缩。 Wan 使用 <strong>flow matching</strong> 而不是传统的 DDPM 式 diffusion，学习从噪声到视频潜伏的直接传输路径。 3D VAE 在空间和时间上压缩视频(4 倍时间压缩)，DiT 使用完整的 3D attention 处理生成的时空潜在 tokens。</p>
+</li>
+<li>
+<p>Wan 支持文本到视频、图像到视频(静态图像动画)和视频编辑。 14B 模型可生成长达 5 秒、分辨率为 720p 的连贯视频，这表明，在仔细选择架构和训练方案时，开源模型可以接近专有系统的质量。</p>
+</li>
+</ul>
+<p><img alt="Text-to-video pipeline: text encoded by language model, spacetime noise denoised by temporal diffusion transformer attending to text embeddings, decoded by 3D VAE into video frames" src="../../images/text_to_video_pipeline.svg" /></p>
+<h2 id="_9">文本转音频生成<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ul>
+<li>想象一下电影作曲家阅读剧本并为配乐配乐。文本到音频模型做了类似的事情：给定文本描述(“一场大雨和远处雷声的雷暴”)，它们会生成相应的音频波形。挑战在于弥合文本的离散、符号性质与声音的连续、时间性质之间的差距。</li>
+</ul>
+<h3 id="audiolm">AudioLM：音频语言建模<a class="headerlink" href="#audiolm" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>AudioLM</strong>(Borsos 等人，2023)通过自回归预测离散音频 tokens 来生成音频，借鉴 DALL-E 用于图像的相同语言建模范例。它使用分层的 token 结构：<strong>语义 tokens</strong> (来自像 w2v-BERT 这样的自监督模型，回想第 9 章)捕获高级内容(正在说或播放的内容)，而 <strong>声学 tokens</strong> (来自 SoundStream，一种神经音频编解码器)捕获细粒度的声学细节(听起来如何 - 音色，录音质量)。</p>
+</li>
+<li>
+<p>生成分两个阶段进行。首先，transformer 在给定可选音频 prompt 的情况下预测语义 tokens，从而建立高级内容计划。其次，另一个 transformer 预测声学 tokens 以语义 tokens 为条件，填充声学细节。这个层次结构反映了文本到语音的管道(第 9 章)——语义 tokens 扮演音素的角色，声学 tokens 扮演梅尔频谱图框架的角色。</p>
+</li>
+<li>
+<p>AudioLM 可以生成语音延续(给定 3 秒语音，生成接下来的 10 秒)、音乐延续和声音效果，所有这些都来自在纯音频数据上训练的单个模型(预训练不需要文本标签)。</p>
+</li>
+</ul>
+<h3 id="musiclm">MusicLM：文本调节音乐<a class="headerlink" href="#musiclm" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>MusicLM</strong>(Agostinelli 等人，2023)将 AudioLM 扩展到文本条件音乐生成。它添加了一个文本-音频联合 embedding(来自 <strong>MuLan</strong>，一个在音乐-文本对上训练的类似 CLIP 的模型)来调节生成。 MuLan embedding 捕获文本描述的语义含义(“带有萨克斯管独奏的乐观爵士乐”)并指导分层的 token 生成。</p>
+</li>
+<li>
+<p>MusicLM 生成任意持续时间的 24 kHz 音乐，在长达数分钟的作品中保持旋律和节奏的连贯性。它还可以以哼唱旋律(使用由音高跟踪器提取的旋律 tokens)加上文本描述为条件，生成遵循文本描述风格的哼唱曲调的完整编曲。</p>
+</li>
+</ul>
+<h3 id="musicgen">MusicGen：高效单级发电<a class="headerlink" href="#musicgen" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>MusicGen</strong> (Copet 等人，2023)简化了多阶段方法。 MusicGen 使用单个 autoregressive transformer 来直接从音频编解码器生成多个 codebook 级别，而不是单独的语义和声学模型。关键的创新是 <strong>交错 codebook 模式</strong>：MusicGen 不是在一个时间步长内生成所有 codebook 级别，然后再转到下一个时间步长，而是在码本和时间步长之间交错 tokens ，这种模式允许并行解码某些 codebook 级别。</p>
+</li>
+<li>
+<p>调节很简单：文本由 T5 encoder 编码，文本 embeddings 被添加到音频 token 序列之前(类似于语言模型中的前缀 prompt)或通过 cross-attention 注入。 MusicGen 还支持旋律调节：参考旋律的色谱图(来自第 9 章讨论的频谱图特征)被编码并与文本条件一起使用。</p>
+</li>
+</ul>
+<div class="arithmatex">\[p(a_1, \ldots, a_T) = \prod_{t=1}^{T} \prod_{k=1}^{K} p(a_{t,k} \mid a_{&lt;t}, c_{\text{text}})\]</div>
+<ul>
+<li>其中 <span class="arithmatex">\(a_{t,k}\)</span> 是时间步 <span class="arithmatex">\(t\)</span> 和 codebook 级别 <span class="arithmatex">\(k\)</span> 处的音频 token，<span class="arithmatex">\(c_{\text{text}}\)</span> 是文本调节。 <span class="arithmatex">\(k\)</span> 上的乘积根据 codebook 模式进行因式分解 - 某些水平是并行预测的。</li>
+</ul>
+<p><img alt="Text-to-audio pipeline: text encoded by language model, transformer decoder generates discrete audio tokens across multiple codebook levels in an interleaved pattern, audio codec decoder reconstructs the waveform" src="../../images/text_to_audio_pipeline.svg" /></p>
+<h2 id="_10">图像到文本的生成<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<ul>
+<li>现在翻转方向：给定图像，生成自然语言描述。这就是<strong>图像字幕</strong>，它是条件文本生成的一种形式，其中图像是条件。想象一下描述一幅画的博物馆指南——他们必须感知视觉内容，理解物体之间的关系，并用流利的语言表达他们的观察结果。</li>
+</ul>
+<h3 id="_11">作为条件生成的字幕<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>经典方法使用<strong>编码器-解码器</strong>架构(第 07 章)。预先训练的 CNN 或 ViT (第 8 章)将图像编码为一组特征向量。语言模型 decoder 逐字生成标题，关注每一步的图像特征：</li>
+</ul>
+<div class="arithmatex">\[p(w_1, \ldots, w_L \mid I) = \prod_{l=1}^{L} p(w_l \mid w_1, \ldots, w_{l-1}, I)\]</div>
+<ul>
+<li>
+<p>其中 <span class="arithmatex">\(w_l\)</span> 是标题文字，<span class="arithmatex">\(I\)</span> 是图像表示。交叉注意力将文本 decoder 连接到图像特征，允许模型在生成不同的单词时“查看”图像的不同区域 - 在生成“dog”时关注狗区域，在生成“park”时关注公园区域。</p>
+</li>
+<li>
+<p><strong>CoCa</strong>(Contrastive Captioners，Yu 等人，2022)将对比学习(文件 01 的 CLIP 式目标)与单个模型中的字幕统一起来。图像 encoder 生成的特征既可用于与文本的对比对齐，也可用于字幕 decoder 中的 cross-attention。这种多任务训练为 CoCa 提供了强大的 zero-shot 识别(来自对比学习)和强大的生成(来自字幕)。</p>
+</li>
+</ul>
+<h3 id="_12">现代视觉语言字幕<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>现代方法经常使用<strong>大型多模态模型</strong>(文件 02)来添加字幕。像 LLaVA、Qwen-VL 和 GPT-4V 这样的模型将字幕视为视觉问答的特殊情况——“问题”隐含地“描述这个图像”。视觉 encoder (CLIP ViT 或 SigLIP)生成投影到 LLM 的 embedding 空间中的补丁 tokens，并且 LLM 生成自由格式的描述。</p>
+</li>
+<li>
+<p>基于 LLM 的字幕相对于专用编码器-解码器模型的优势在于<strong>遵循指令</strong>：您可以要求不同级别的细节(“用一句话描述”与“提供详细的段落”)，专注于特定方面(“描述颜色”)，或生成结构化输出(“列出所有对象及其位置”)。这种灵活性来自 LLM 的指令调整(第 07 章)。</p>
+</li>
+</ul>
+<h2 id="_13">视频音频联产<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<ul>
+<li>想象一下在关闭声音的情况下观看电影——这种体验是空洞的。视觉内容和音频紧密结合：弹跳的球发出有节奏的撞击声，雨滴发出啪嗒啪嗒的声音，人群发出欢呼声。 <strong>视频-音频联合生成</strong>旨在同时产生两种模式，保持您所看到的和您听到的内容之间的时间一致性。</li>
+</ul>
+<h3 id="_14">联合时间建模<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>核心挑战是<strong>时间同步</strong>：击鼓的音频必须与显示鼓槌击打鼓的视觉框架完全一致。这需要两种模式都可以引用的共享时间表示。</p>
+</li>
+<li>
+<p>一种方法是从共享的潜在时间线生成视频和音频。像 <strong>CoDi</strong> (Composable Diffusion, Tang et al., 2023) 这样的模型对每种模态使用单独的 diffusion 模型，但通过共享的潜在空间对齐它们。在训练期间，跨模式 attention 层学习在每个时间步同步视觉和音频特征。在生成过程中，两个 diffusion 进程同时运行，通过共享对齐相互调节。</p>
+</li>
+<li>
+<p>VideoPoet(如上所述)采用更统一的方法：由于所有模态都被标记为单个序列，因此 LLM 自然地学习视频和音频 tokens 之间的时间对应关系。狗吠的视频剪辑和相应的音频 tokens 教模型将视觉吠叫动作与吠叫声联系起来。</p>
+</li>
+<li>
+<p><strong>时间对齐丢失</strong>函数明确强制同步。一种公式在帧级别使用对比学习：时间 <span class="arithmatex">\(t\)</span> 的音频片段应该与时间 <span class="arithmatex">\(t\)</span> 的视频帧比其他时间的帧更相似：</p>
+</li>
+</ul>
+<div class="arithmatex">\[\mathcal{L}_{\text{sync}} = -\mathbb{E}_t \left[\log \frac{\exp(\text{sim}(v_t, a_t) / \tau)}{\sum_{t'} \exp(\text{sim}(v_t, a_{t'}) / \tau)}\right]\]</div>
+<ul>
+<li>其中 <span class="arithmatex">\(v_t\)</span> 和 <span class="arithmatex">\(a_t\)</span> 是时间 <span class="arithmatex">\(t\)</span> 时的视频和音频表示，<span class="arithmatex">\(\tau\)</span> 是温度参数。这在结构上与文件 01 中的 InfoNCE 丢失相同，但应用于时间帧级别而不是剪辑级别。</li>
+</ul>
+<h2 id="_15">指令后续生成<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<ul>
+<li>想象一下告诉一位艺术家“让天空更加戏剧化”或“用王冠代替帽子”。 <strong>指令跟随生成</strong>允许您使用自然语言命令而不是精确的空间蒙版或画笔描边来编辑图像。</li>
+</ul>
+<h3 id="instructpix2pix">InstructPix2Pix：按描述编辑<a class="headerlink" href="#instructpix2pix" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>InstructPix2Pix</strong> (Brooks et al., 2023) 训练一个条件 diffusion 模型，该模型采用输入图像和文本指令，然后生成编辑后的图像。巧妙的部分是如何创建训练数据：GPT-3 生成与输入输出文本标题配对的编辑指令(“让它成为冬天”、“把猫变成狗”)，并且文本到图像模型(稳定扩散)生成相应的图像对。</p>
+</li>
+<li>
+<p>该模型是经过修改的稳定扩散 U-Net，它接收文本指令(通过 cross-attention)和输入图像潜伏(按通道与噪声潜伏连接)。它使用 <strong>双分类器免费指导</strong> 和两种指导尺度 - 一种用于文本指令 (<span class="arithmatex">\(s_T\)</span>)，一种用于输入图像 (<span class="arithmatex">\(s_I\)</span>)：</p>
+</li>
+</ul>
+<div class="arithmatex">\[\hat{\epsilon} = \epsilon_\theta(x_t, \varnothing, \varnothing) + s_I \cdot (\epsilon_\theta(x_t, c_I, \varnothing) - \epsilon_\theta(x_t, \varnothing, \varnothing)) + s_T \cdot (\epsilon_\theta(x_t, c_I, c_T) - \epsilon_\theta(x_t, c_I, \varnothing))\]</div>
+<ul>
+<li>其中 <span class="arithmatex">\(c_I\)</span> 是输入图像条件，<span class="arithmatex">\(c_T\)</span> 是文本指令。第一个指导项控制输入图像的保留程度；第二个控制控制遵循指令的强度。这为用户提供了一个二维旋钮：高 <span class="arithmatex">\(s_I\)</span> 紧密保留原始内容，而高 <span class="arithmatex">\(s_T\)</span> 进行更戏剧性的编辑。</li>
+</ul>
+<p><img alt="InstructPix2Pix: input image and text instruction feed into a modified diffusion model, producing an edited image that follows the instruction while preserving unedited regions" src="../../images/instructpix2pix_pipeline.svg" /></p>
+<h3 id="sdedit">SDEdit 和基于噪声的编辑<a class="headerlink" href="#sdedit" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>SDEdit</strong>(Meng 等人，2022)提供了一种更简单的编辑方法，无需特殊培训。您获取输入图像，为其添加噪声(将前向 diffusion 进程运行到中间时间步 <span class="arithmatex">\(t_0\)</span>)，然后使用描述所需输出的文本 prompt 进行去噪。噪声量控制编辑强度：低噪声保留结构(颜色变化、风格转换)，而高噪声允许重大重组(对象替换、布局更改)。</p>
+</li>
+<li>
+<p>权衡是精确的：在时间步 <span class="arithmatex">\(t_0\)</span> 处，噪声图像保留原始信号的 <span class="arithmatex">\(\bar{\alpha}_{t_0}\)</span> 部分。去噪过程根据新文本 prompt 填充损坏的细节。这是有数学依据的：diffusion 模型从后验 <span class="arithmatex">\(p(x_0 \mid x_{t_0}, c)\)</span> 中采样，其中 <span class="arithmatex">\(x_{t_0}\)</span> 限制生成“接近”原始版本。</p>
+</li>
+</ul>
+<h3 id="_0"><strong>学期_0</strong>：空间调节<a class="headerlink" href="#_0" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>ControlNet</strong>(Zhang 等人，2023)为文本到图像 diffusion 添加了细粒度的空间控制。预训练的 U-Net encoder 的副本经过训练以接受额外的输入条件 - 边缘图(Canny 边缘)、深度图、姿势骨架、分割图 - 而原始 U-Net 权重被冻结。 ControlNet encoder 的输出通过<strong>零卷积</strong>(1x1 卷积初始化为零)添加到冻结的 U-Net 的跳跃连接中，确保训练从预训练模型的行为开始并逐渐学习新条件。</p>
+</li>
+<li>
+<p>此架构允许您提供草图、深度图或人体姿势作为结构指南，并且文本 prompt 填充外观。预先训练的权重处理照片真实感和文本理解； ControlNet 层处理条件的空间保真度。</p>
+</li>
+</ul>
+<h2 id="_16">一致性和对齐指标<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<ul>
+<li>如何衡量生成的图像是否良好？ “好”至少有两个维度：<strong>质量</strong>(它看起来像真实的图像吗？)和<strong>对齐</strong>(它是否与文本prompt匹配？)。已经开发了一些指标来量化这些指标。</li>
+</ul>
+<h3 id="frechet-fid">Frechet 起始距离 (FID)<a class="headerlink" href="#frechet-fid" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Frechet Inception Distance (FID)</strong> (Heusel et al., 2017) 测量预训练 Inception 网络的特征空间中生成图像与真实图像的分布之间的距离。将其视为比较两个图像集合的“指纹”，而不是比较单个图像。</p>
+</li>
+<li>
+<p>真实图像集和生成图像集都通过 Inception-v3，并收集倒数第二层的激活。这些激活被建模为多元高斯 <span class="arithmatex">\(\mathcal{N}(\mu_r, \Sigma_r)\)</span> 和 <span class="arithmatex">\(\mathcal{N}(\mu_g, \Sigma_g)\)</span>。 FID 是这些高斯之间的 Frechet 距离(Wasserstein-2 距离)：</p>
+</li>
+</ul>
+<div class="arithmatex">\[\text{FID} = \|\mu_r - \mu_g\|^2 + \text{Tr}\left(\Sigma_r + \Sigma_g - 2(\Sigma_r \Sigma_g)^{1/2}\right)\]</div>
+<ul>
+<li>
+<p>FID 越低越好。 FID = 0 表示分布相同。 FID 捕获质量(如果生成的图像模糊，其特征将与真实图像不同)和多样性(如果模型出现模式崩溃，<span class="arithmatex">\(\Sigma_g\)</span> 将小于 <span class="arithmatex">\(\Sigma_r\)</span>)。 ImageNet 256x256 上的典型最新值是 FID &lt; 2.0。</p>
+</li>
+<li>
+<p>FID 具有已知的局限性：它假设高斯特征分布(近似)，它需要数千个样本才能进行稳定估计，并且它使用 Inception 特征(可能无法捕获所有感知相关的差异)。</p>
+</li>
+</ul>
+<h3 id="is">起始分数 (IS)<a class="headerlink" href="#is" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>初始分数 (IS)</strong>(Salimans 等人，2016)衡量两个属性：每个生成的图像应该可以自信地分类(条件类分布 <span class="arithmatex">\(p(y \mid x)\)</span> 应该达到峰值)，并且生成的图像集应该覆盖许多类(边缘 <span class="arithmatex">\(p(y) = \mathbb{E}_x[p(y \mid x)]\)</span> 应该是均匀的)。 IS 通过 KL 散度将这些结合起来：</li>
+</ul>
+<div class="arithmatex">\[\text{IS} = \exp\left(\mathbb{E}_x \left[D_{\text{KL}}(p(y \mid x) \| p(y))\right]\right)\]</div>
+<ul>
+<li>IS 越高越好。最大 IS 等于类数(ImageNet 为 1000)。 IS 奖励质量(清晰、可识别的图像)和多样性(类别的覆盖范围)，但它有很大的局限性：它完全忽略真实的数据分布，它无法检测类别内的模式下降，并且它偏向于类似 ImageNet 的图像，因为它使用 Inception 的类别预测。</li>
+</ul>
+<h3 id="clipscore-">CLIPScore：测量文本-图像对齐<a class="headerlink" href="#clipscore-" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>CLIPScore</strong>(Hessel 等人，2021)使用预先训练的 CLIP 模型(文件 01)直接测量生成的图像与其文本 prompt 的匹配程度。分数只是 CLIP 图像 embedding 和 CLIP 文本 embedding 之间的余弦相似度：</li>
+</ul>
+<div class="arithmatex">\[\text{CLIPScore}(I, T) = \max(0, \cos(E_I(I), E_T(T)))\]</div>
+<ul>
+<li>
+<p>其中 <span class="arithmatex">\(E_I\)</span> 和 <span class="arithmatex">\(E_T\)</span> 是 CLIP 图像和文本编码器。 CLIPScore 是无参考的 — 它不需要真实图像，只需要文本 prompt。它与人类对文本图像对齐的判断密切相关，并已成为评估文本到图像模型中 prompt 保真度的标准指标。</p>
+</li>
+<li>
+<p>为了与参考标题进行比较，<strong>RefCLIPScore</strong> 包含参考图像：</p>
+</li>
+</ul>
+<div class="arithmatex">\[\text{RefCLIPScore} = \text{HarmonicMean}(\text{CLIPScore}(I, T), \max(0, \cos(E_I(I), E_I(I_{\text{ref}}))))\]</div>
+<ul>
+<li>这可以平衡文本对齐与参考的视觉相似性。</li>
+</ul>
+<p><img alt="Evaluation metrics: FID compares feature distributions of real and generated image sets, IS measures quality and diversity of generated images alone, CLIPScore measures cosine similarity between image and text embeddings" src="../../images/generation_evaluation_metrics.svg" /></p>
+<h3 id="_17">人工评价<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>自动化指标是代理；人类的判断仍然是黄金标准。常见协议包括<strong>成对比较</strong>(两个图像中哪一个更匹配 prompt？)、<strong>Likert 量表</strong>(从 1-5 评分质量和对齐)和 <strong>Elo 评级</strong>(跨模型的锦标赛风格排名)。 DrawBench 和 PartiPrompts 基准为系统的人类评估提供了标准化的 prompt 集。</li>
+</ul>
+<h2 id="_18">道德考虑<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<ul>
+<li>跨模式生成是人工智能中最具道德影响的领域之一。从文本描述创建逼真图像、视频和音频的能力引起了从业者必须认真对待的深刻关注。</li>
+</ul>
+<h3 id="_19">深度造假和错误信息<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>深度伪造</strong>是生成或操纵的媒体，旨在描述从未发生过的事件。文本到图像和文本到视频模型可以创建令人信服的公众人物假照片、伪造证据和误导性新闻图像。危险不仅在于假货的存在，而且它们的存在破坏了对所有媒体的信任——如果任何图像都可能是假的，那么就没有图像是完全可信的。</p>
+</li>
+<li>
+<p>检测方法包括在真实图像与生成图像上训练分类器、分析统计伪影(GAN 生成的图像具有微妙的光谱特征)和 embedding 不可见水印(Stable Diffusion 的不可见水印、Google 的 SynthID)。然而，检测是一场军备竞赛：随着发电机的改进，检测器必须不断更新。</p>
+</li>
+</ul>
+<h3 id="_20">一代人的偏见<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>基于互联网规模数据训练的模型继承并放大了社会偏见。文本到图像模型不成比例地生成浅肤色的面孔，将某些职业与特定性别联系起来，并默认西方文化规范来提供未指定的提示。这些偏差植根于训练数据分布和 CLIP/T5 文本编码器，它们对来自自己的训练语料库的偏差进行编码。</p>
+</li>
+<li>
+<p>缓解策略包括策划更具代表性的训练数据、对文本编码器应用去偏技术、使用安全分类器过滤有问题的输出，以及使用户能够控制人口统计属性。这些都不是完整的解决方案，持续的审核至关重要。</p>
+</li>
+</ul>
+<h3 id="_21">内容过滤和安全<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>负责任的部署需要多层保护。 <strong>输入过滤</strong> 在生成之前阻止有害提示。 <strong>输出过滤</strong> 对生成的内容进行分类并拒绝有害材料。 <strong>NSFW 分类器</strong> 检测露骨、暴力或其他有害内容。例如，Stable Diffusion 的安全检查器计算生成图像的 CLIP embedding 和一组预定义的有害概念 embeddings 之间的余弦相似度，标记超过阈值的图像。</p>
+</li>
+<li>
+<p>许多生成模型(稳定扩散，Wan)的开源性质在民主化访问和防止滥用之间造成了紧张。一旦模型权重被释放，内容过滤就可以被绕过。这引发了关于适当的开放程度和模型开发人员的责任的争论。</p>
+</li>
+</ul>
+<h3 id="_22">知识产权和同意<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<ul>
+<li>基于互联网数据训练的生成模型可能会在未经同意的情况下复制受版权保护的风格、商标或真人肖像。法律和道德框架仍在不断发展，但负责任的做法包括尊重选择退出机制，承认培训数据中嵌入的创造性贡献，以及制定防止记忆和重复培训示例的技术保障措施。</li>
+</ul>
+<h2 id="colab">编码任务(使用 CoLab 或笔记本)<a class="headerlink" href="#colab" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>为玩具 2D diffusion 模型实施无分类器指导。在 2D 数据集(例如，标记的簇)上训练条件 diffusion 模型，然后使用不同的指导尺度进行采样以观察质量多样性权衡。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Toy 2D conditional diffusion with classifier-free guidance</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">noise_schedule</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">betas</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">alphas</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">betas</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">forward_diffuse</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">alpha_bars</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">noise</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha_bars</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">*</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha_bars</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">*</span> <span class="n">noise</span><span class="p">,</span> <span class="n">noise</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># Generate labelled 2D data: class 0 = ring, class 1 = cluster</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="p">(</span><span class="mi">200</span><span class="p">,))</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pi</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">ring</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">ring</span> <span class="o">+=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">k2</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="n">cluster</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">k3</span><span class="p">,</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.3</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="n">data</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">ring</span><span class="p">,</span> <span class="n">cluster</span><span class="p">])</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="n">labels</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">200</span><span class="p">)])</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="c1"># Simulate CFG: show how guidance pushes samples toward class-conditional modes</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="c1"># Try varying guidance_scale from 0.0 to 5.0 and observe results</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">guidance_scales</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">]</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">guidance_scales</span><span class="p">):</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ring</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">ring</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ring (c=0)&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cluster</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cluster (c=1)&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Guidance scale s=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Experiment: vary guidance scale and observe quality vs diversity&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="c1"># Exercise: train a small MLP denoiser with class conditioning,</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="c1"># then implement the CFG formula to sample with different s values.</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>使用完整的 Frechet 距离公式计算两组 2D 样本之间的 FID。改变生成的分布并观察 FID 如何变化。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">compute_fid</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">generated</span><span class="p">):</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Frechet distance between two 2D sample sets.&quot;&quot;&quot;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">mu_r</span><span class="p">,</span> <span class="n">mu_g</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">generated</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">sigma_r</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">real</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">sigma_g</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">generated</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">diff</span> <span class="o">=</span> <span class="n">mu_r</span> <span class="o">-</span> <span class="n">mu_g</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="c1"># Matrix square root via eigendecomposition</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">product</span> <span class="o">=</span> <span class="n">sigma_r</span> <span class="o">@</span> <span class="n">sigma_g</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="n">eigvals</span><span class="p">,</span> <span class="n">eigvecs</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">sqrt_product</span> <span class="o">=</span> <span class="n">eigvecs</span> <span class="o">@</span> <span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">eigvals</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span> <span class="o">@</span> <span class="n">eigvecs</span><span class="o">.</span><span class="n">T</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="n">fid</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diff</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">sigma_r</span> <span class="o">+</span> <span class="n">sigma_g</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sqrt_product</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="k">return</span> <span class="n">fid</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">,</span> <span class="n">k4</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="c1"># Real distribution: standard 2D Gaussian</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">real</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="c1"># Generated distributions with increasing divergence</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="n">shifts</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">shifts</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">shifts</span><span class="p">):</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>    <span class="n">gen</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">k2</span><span class="p">,</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">shift</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">)</span> <span class="o">+</span> <span class="n">shift</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    <span class="n">fid</span> <span class="o">=</span> <span class="n">compute_fid</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">gen</span><span class="p">)</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">real</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">real</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gen</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">gen</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Generated&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shift=</span><span class="si">{</span><span class="n">shift</span><span class="si">}</span><span class="se">\n</span><span class="s1">FID=</span><span class="si">{</span><span class="n">fid</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;FID increases as generated distribution diverges from real&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="c1"># Try: change the variance of generated samples without shifting the mean.</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="c1"># How does FID respond to a diversity mismatch vs a location mismatch?</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>使用随机投影作为 CLIP 的替代，在文本和图像 embeddings 之间实现 CLIPScore 计算。当您改变模态之间的“对齐方式”时，观察余弦相似度的表现。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">cosine_similarity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">clip_score</span><span class="p">(</span><span class="n">img_emb</span><span class="p">,</span> <span class="n">txt_emb</span><span class="p">):</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;CLIPScore: clamped cosine similarity.&quot;&quot;&quot;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">img_emb</span><span class="p">,</span> <span class="n">txt_emb</span><span class="p">))</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="n">dim</span> <span class="o">=</span> <span class="mi">512</span>  <span class="c1"># CLIP embedding dimension</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># Simulate aligned and misaligned pairs</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># Aligned: image and text embeddings share a component</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="n">shared</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="p">(</span><span class="n">dim</span><span class="p">,))</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="n">shared</span> <span class="o">=</span> <span class="n">shared</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">shared</span><span class="p">)</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="n">noise_levels</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="k">for</span> <span class="n">noise</span> <span class="ow">in</span> <span class="n">noise_levels</span><span class="p">:</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    <span class="n">noise_vec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">k2</span><span class="p">,</span> <span class="p">(</span><span class="n">dim</span><span class="p">,))</span> <span class="o">*</span> <span class="n">noise</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="n">img_emb</span> <span class="o">=</span> <span class="n">shared</span> <span class="o">+</span> <span class="n">noise_vec</span> <span class="o">*</span> <span class="mf">0.3</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="n">txt_emb</span> <span class="o">=</span> <span class="n">shared</span> <span class="o">+</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">k3</span><span class="p">,</span> <span class="p">(</span><span class="n">dim</span><span class="p">,))</span> <span class="o">*</span> <span class="n">noise</span> <span class="o">*</span> <span class="mf">0.3</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">clip_score</span><span class="p">(</span><span class="n">img_emb</span><span class="p">,</span> <span class="n">txt_emb</span><span class="p">)))</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noise_levels</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2c3e50&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Noise level (misalignment)&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CLIPScore&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;CLIPScore decreases as text-image alignment degrades&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="c1"># Experiment: what happens if you normalise embeddings before adding noise?</span>
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="c1"># How does dimensionality affect the score distribution?</span>
+</code></pre></div></p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../03.%20image%20and%20video%20tokenisation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Image and Video Tokenisation">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Image and Video Tokenisation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../05.%20unified%20multimodal%20architectures/" class="md-footer__link md-footer__link--next" aria-label="Next: Unified Multimodal Architectures">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Unified Multimodal Architectures
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/dengxuhui/maths-cs-ai-compendium_CN" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
